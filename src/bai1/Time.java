@@ -38,15 +38,55 @@ public class Time {
         String s = "";
         if (hour < 10 && minute < 10 && second < 10) {
             s = "0" + this.hour + ":" + "0" + this.minute + ":" + "0" + this.second;
-        } else if (hour >= 10 && minute > 10 && second >= 10) {
+        } else if (hour >= 10 && minute >= 10 && second >= 10) {
             s = this.hour + ":" + this.minute + ":" + this.second;
         } else if (hour < 10 && minute >= 10 && second >= 10) {
             s = "0" + this.hour + ":" + this.minute + ":" + this.second;
+        } else if (hour < 10 && minute < 10 && second >= 10) {
+            s = "0" + this.hour + ":" + "0" + this.minute + ":" + this.second;
+        } else if (hour >= 10 && minute >= 10 && second < 10) {
+            s = this.hour + ":" + this.minute + ":" + "0" + this.second;
+        }else if (hour >= 10 && minute < 10 && second < 10) {
+            s = this.hour + ":" + "0" + this.minute + ":" + "0" + this.second;
         } else if (hour == 0) {
             s = "00" + ":" +  this.minute + ":" + this.second;
         } else if (minute == 0) {
             s =  this.hour + "00" + ":" + this.second;
         }
         return s;
+    }
+
+    public void nextSecond() {
+        second++;
+        if (hour == 23 && minute == 59 && second == 60) {
+            hour = 0;
+            minute = 0;
+            second = 0;
+        } else if (hour < 23 && minute == 59 && second == 60) {
+            hour++;
+            minute = 0;
+            second = 0;
+        } else if (hour < 23 && minute < 59 && second == 60) {
+            hour++;
+            minute++;
+            second = 0;
+        }
+    }
+
+    public void previousSecond() {
+        second--;
+        if (hour == 0 && minute == 0 && second == 0) {
+            hour = 23;
+            minute = 59;
+            second = 59;
+        } else if (hour > 0 && minute == 0 && second == 0) {
+            hour--;
+            minute = 59;
+            second = 59;
+        } else if (hour > 0 && minute > 0 && second == 0) {
+            hour--;
+            minute--;
+            second = 59;
+        }
     }
 }
