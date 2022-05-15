@@ -13,20 +13,23 @@ public class Bai16 {
     public static void removeDupElement(int[] arr) {
         int length = arr.length;
         int[] newArr = new int[length];
-        int j = 0;
+        int k = 0;
 
-        for (int i = 0; i < length - 1; i++) {
-            if (arr[i] != arr[i + 1]) {
-                newArr[j++] = arr[i];
+        for (int i = 0; i < length; i++) {
+            boolean isExisted = false;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] == arr[j]) {
+                    isExisted = true;
+                    break;
+                }
+            }
+            if (!isExisted) {
+                newArr[k] = arr[i];
+                k++;
             }
         }
-        newArr[j++] = arr[length - 1];
 
-        for (int i = 0; i < j; i++) {
-            arr[i] = newArr[i];
-        }
-
-        for (int i = 0; i < newArr.length; i++) {
+        for (int i = 0; i < k; i++) {
             System.out.print(newArr[i] + " ");
         }
     }
